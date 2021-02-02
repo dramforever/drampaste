@@ -1,0 +1,66 @@
+cabal-version:          2.2
+name:                   drampaste
+version:                0.1.0.0
+license:                ISC
+author:                 dramforever
+maintainer:             dramforever@live.com
+category:               Web
+
+data-files:             wordlist/words.txt
+
+common common
+  ghc-options:
+    -Wall
+  default-extensions:
+    OverloadedStrings
+
+    -- For Servant
+    DataKinds
+    DeriveGeneric
+    FlexibleInstances
+    GeneralizedNewtypeDeriving
+    MultiParamTypeClasses
+    OverloadedStrings
+    RankNTypes
+    ScopedTypeVariables
+    TypeApplications
+    TypeOperators
+
+library
+  import: common
+  exposed-modules:
+    DramPaste.Words
+    DramPaste.Server
+  other-modules:
+    Paths_drampaste
+  build-depends:
+      base ^>= 4.14.1.0
+    , bytestring
+    , conduit
+    , http-client-tls
+    , minio-hs
+    , mtl
+    , unliftio
+    , random
+    , servant
+    , servant-conduit
+    , servant-server
+    , template-haskell
+    , text
+    , vector
+    , wai
+    , warp
+  hs-source-dirs:       src
+  default-language:     Haskell2010
+
+executable drampaste
+  import: common
+  main-is:              Main.hs
+  build-depends:
+      base ^>= 4.14.1.0
+    , drampaste
+    , minio-hs
+    , mtl
+    , warp
+  hs-source-dirs:       app
+  default-language:     Haskell2010
